@@ -95,7 +95,7 @@
 				$Program_Selected['uncategorized'] = 'selected';
 			}
 	
-			$body = "<h1>Applications for for {$user->FirstName} {$user->LastName}</h1>\n";
+			$body = "<h1>Applications for  {$user->firstName} {$user->lastName}</h1>\n";
 
 			if ($message) {
 				$body .= "<p class='message'>$message</p>\n";
@@ -131,7 +131,7 @@
   <label for=Answer_1>What was your favorite undergraduate nursing course?  </label>
   </br>
   <textarea name="Answer_1" rows="6" cols="80" placeholder="">$Answer_1</textarea></p>
-  <input type="submit" value="Submit">
+  <input type="submit" value="Submit"><input type="submit" name='cancel' value="Cancel">
 </form>
 EOT2;
 

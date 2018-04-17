@@ -157,7 +157,7 @@ FROM Applications INNER JOIN users ON users.studentID = Applications.studentID";
 			$idEscaped = $this->mysqli->real_escape_string($id);
 			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
 
-			$sql = "SELECT Applications.id, Applications.studentID, users.First_Name, users.Last_Name
+			$sql = "SELECT Applications.id, Applications.application_question_1, Applications.studentID, users.First_Name, users.Last_Name
 FROM users INNER JOIN Applications ON Applications.studentID = users.studentid
 WHERE Applications.id ='$idEscaped'";
 			if ($result = $this->mysqli->query($sql)) {
@@ -249,25 +249,22 @@ WHERE Applications.id ='$idEscaped'";
 			
 			$id = $data['id'];
 			if (! $id) {
-				$this->error = "No id specified for task to update.";
+				$this->error = "No id specified for application to update.";
 				return $this->error;			
 			}
 			
-			$title = $data['title'];
+		/*	$title = $data['title'];
 			if (! $title) {
 				$this->error = "No title found for task to update. A title is required.";
 				return $this->error;			
-			}		
+			}		*/
 			
-			$description = $data['description'];
-			$category = $data['category'];
-			
-			$idEscaped = $this->mysqli->real_escape_string($id);
-			$titleEscaped = $this->mysqli->real_escape_string($title);
-			$descriptionEscaped = $this->mysqli->real_escape_string($description);
-			$categoryEscaped = $this->mysqli->real_escape_string($category);
+			$Answer1 = $data['Answer_1'];
+			$idEscaped = $this->mysqli->real_escape_string($id); //applicationID
 			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
-			$sql = "UPDATE tasks SET title='$titleEscaped', description='$descriptionEscaped', category='$categoryEscaped' WHERE userID = $userIDEscaped AND id = $idEscaped";
+			
+			
+			$sql = "UPDATE Applications SET application_question_1='$Answer1' WHERE id= $idEscaped";
 			if (! $result = $this->mysqli->query($sql) ) {
 				$this->error = $this->mysqli->error;
 			} 

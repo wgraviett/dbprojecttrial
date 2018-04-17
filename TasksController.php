@@ -56,9 +56,9 @@
 				case 'edit':
 					$this->handleEditTask();
 					break;
-				/*case 'update':
+				case 'update':
 					$this->handleUpdateTask();
-					break;*/
+					break;
 				default:
 					$this->verifyLogin();
 			}
