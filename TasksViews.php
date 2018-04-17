@@ -168,8 +168,8 @@ EOT2;
 			$body .= "<form action='index.php' method='post'>";
 		
 			if ($data['id']) {
-				$body .= "<input type='hidden' name='action' value='update' readonly = 'readonly'/>";
-				$body .= "<input type='hidden' name='id' value='{$data['id']}' readonly = 'readonly' />";
+				$body .= "<input type='hidden' name='action' value='update' readonly/>";
+				$body .= "<input type='hidden' name='id' value='{$data['id']}' readonly/>";
 			} else {
 				$body .= "<input type='hidden' name='action' value='add' readonly = 'readonly' />";
 			}
@@ -195,7 +195,6 @@ EOT2;
   <label for=Answer_1>What was your favorite undergraduate nursing course?  </label>
   </br>
   <textarea name="Answer_1" rows="6" cols="80" placeholder="">$Answer_1</textarea></p>
-  <input type="submit" value="Submit">
 </form>
 EOT2;
 
