@@ -219,7 +219,7 @@ WHERE Applications.id ='$idEscaped'";
 			} else {
 				$idEscaped = $this->mysqli->real_escape_string($id);
 				$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
-				$sql = "UPDATE Applications SET application_status = $status WHERE id = '$idEscaped'";
+				$sql = "UPDATE Applications SET application_status = '$status' WHERE id = '$idEscaped'";
 				if (! $result = $this->mysqli->query($sql) ) {
 					$this->error = $this->mysqli->error;
 				}
