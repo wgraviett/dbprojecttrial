@@ -56,6 +56,9 @@
 				case 'edit':
 					$this->handleEditTask();
 					break;
+				case 'view':
+					$this->handleViewTask();
+					break;
 				case 'update':
 					$this->handleUpdateTask();
 					break;
@@ -69,6 +72,9 @@
 					break;
 				case 'taskform':
 					print $this->views->taskFormView($this->model->getUser(), $this->data, $this->message);
+					break;
+				case 'taskview':
+					print $this->views->taskView($this->model->getUser(), $this->data, $this->message);
 					break;
 				default: // 'tasklist'
 					//list($orderBy, $orderDirection) = $this->model->getOrdering();
@@ -161,6 +167,20 @@
 			}
 			$this->data = $task;
 			$this->view = 'taskform';
+		}
+		
+		private function handleViewTask() {
+			if (!$this->verifyLogin()) return;//return if not logged in
+			
+			list($task, $error) = $this->model->getTask($_POST['id']);
+			if ($error) {//error handling
+				$this->message = $error;
+				$this->view = 'tasklist';//returns to tasklist if there is a problem
+				return;
+			}
+			
+			$this->data = $task;
+			$this->view = 'taskview';
 		}
 		
 		private function handleUpdateTask() {
