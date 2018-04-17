@@ -44,15 +44,15 @@
 				//case 'delete':
 				//	$this->handleDelete();
 				//	break;
-				/*case 'set_completed':
-					$this->handleSetCompletionStatus('completed');
+				case 'approve':
+					$this->handleSetApplicationStatus('Accepted');
 					break;
-				case 'set_not_completed':
-					$this->handleSetCompletionStatus('not completed');
+				case 'deny':
+					$this->handleSetApplicationStatus('denied');
 					break;
 				case 'add':
 					$this->handleAddTask();
-					break;*/
+					break;
 				case 'edit':
 					$this->handleEditTask();
 					break;
@@ -131,10 +131,10 @@
 			$this->view = 'tasklist';
 		}
 		
-		private function handleSetCompletionStatus($status) {
+		private function handleSetApplicationStatus($status) {
 			if (!$this->verifyLogin()) return;
 			
-			if ($error = $this->model->updateTaskCompletionStatus($_POST['id'], $status)) {
+			if ($error = $this->model->updateapplicationStatus($_POST['id'], $status)) {
 				$this->message = $error;
 			}
 			$this->view = 'tasklist';

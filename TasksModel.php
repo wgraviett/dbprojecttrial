@@ -207,25 +207,19 @@ WHERE Applications.id ='$idEscaped'";
 			return $this->error;
 		}
 		
-		public function updateTaskCompletionStatus($id, $status) {
+		public function updateapplicationStatus($id, $status) {
 			$this->error = "";
 			
 			if (!$this->user) {
-				$this->error = "User not specified. Unable to update task completion status.";
+				$this->error = "User not specified. Unable to update application status."; // this is not in use. 
 				return $this->error;
 			}
-		
-			$completedDate = 'null';
-			if ($status == 'completed') {
-				$completedDate = 'NOW()';
-			}
-	
 			if (!$id) {
-				$this->error = "No task was specified to change completion status.";
+				$this->error = "No application was specified to change status.";
 			} else {
 				$idEscaped = $this->mysqli->real_escape_string($id);
 				$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
-				$sql = "UPDATE tasks SET completedDate = $completedDate WHERE userID = $userIDEscaped AND id = '$idEscaped'";
+				$sql = "UPDATE Applications SET application_status = $status WHERE id = '$idEscaped'";
 				if (! $result = $this->mysqli->query($sql) ) {
 					$this->error = $this->mysqli->error;
 				}

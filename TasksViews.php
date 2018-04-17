@@ -27,7 +27,7 @@
 			}
 	
 			$body .= "<table>\n";
-			$body .= "<tr><th>delete</th><th>edit</th><th>View</th>";
+			$body .= "<tr><th>delete</th><th>edit</th><th>View</th><th>Approve</th><th>Deny</th>";
 		
 			$columns = array(array('name' => 'id', 'label' => 'Application ID'),
 			array('name' => 'First_Name', 'label' => 'First Name'),
@@ -65,6 +65,8 @@
 				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='delete' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
 				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='edit' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
 				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='view' /><input type='hidden' name='id' value='$id' /><input type='submit' value='View'></form></td>";
+				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='approve' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Approve'></form></td>";
+				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='deny' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Deny'></form></td>";			
 				$body .= "<td>$id</td><td>$First_Name</td><td>$Last_Name</td><td>$StudentID</td><td>$application_status</td><td>$ProgramID</td>";
 				$body .= "</tr>\n";
 			}
@@ -159,7 +161,7 @@ EOT2;
 				$Program_Selected['uncategorized'] = 'selected';
 			}
 	
-			$body = "<h1>Applications for for {$user->FirstName} {$user->LastName}</h1>\n";
+			$body = "<h1>Applications for {$user->firstName} {$user->lastName}</h1>\n";
 
 			if ($message) {
 				$body .= "<p class='message'>$message</p>\n";
