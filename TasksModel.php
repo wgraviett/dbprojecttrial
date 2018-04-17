@@ -270,7 +270,7 @@ WHERE Applications.id ='$idEscaped'";
 			$this->error = '';
 			
 			if (!$this->user) {
-				$this->error = "User not specified. Unable to delete task.";
+				$this->error = "User not specified. Unable to delete app.";
 				return $this->error;
 			}
 			
@@ -280,13 +280,13 @@ WHERE Applications.id ='$idEscaped'";
 			}
 			
 			if (! $id) {
-				$this->error = "No id specified for task to delete.";
+				$this->error = "No id specified for app to delete.";
 				return $this->error;			
 			}			
 		
 			$idEscaped = $this->mysqli->real_escape_string($id);
 			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
-			$sql = "DELETE FROM tasks WHERE userID = $userIDEscaped AND id = $idEscaped";
+			$sql = "DELETE FROM Applications WHERE id = '$idEscaped'";
 			if (! $result = $this->mysqli->query($sql) ) {
 				$this->error = $this->mysqli->error;
 			}

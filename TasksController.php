@@ -41,9 +41,9 @@
 				case 'login':
 					$this->handleLogin();
 					break;
-				//case 'delete':
-				//	$this->handleDelete();
-				//	break;
+				case 'delete':
+					$this->handleDelete();
+					break;
 				case 'approve':
 					$this->handleSetApplicationStatus('Accepted');
 					break;
