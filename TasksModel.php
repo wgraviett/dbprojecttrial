@@ -135,6 +135,35 @@ FROM Applications INNER JOIN users ON users.studentID = Applications.studentID";
 			return array($tasks, $this->error);
 		}
 		
+		
+		public function getuserdata($loginID){
+		
+		$loginIDEscaped = ($loginID->loginID);
+	
+		$sql = "SELECT * FROM users WHERE loginID = '$loginIDEscaped'";
+		
+		if ($result = $mysqli->query($sql)) {
+			if ($result->num_rows > 0) {
+				$user = $result->fetch_assoc();
+				$this->firstName = $user['First_Name'];
+				$this->lastName = $user['Last_Name'];
+				$this->Email = $user['Email'];
+				$this->Street_Address= $user['Street_Address'];
+				$this->City = $user['City'];
+				$this->State = $user['State'];
+				$this->Zipcode = $user['Zipcode'];
+				$this->county = $user['county'];
+				$this->loginID = $user['loginID'];
+				$this->userID = $user['id'];
+			}
+			$result->close();
+			return true;
+		} else {
+			return false;
+		}
+	}
+		
+		
 		public function getTask($id) {
 			$this->error = '';
 			$task = null;
@@ -180,25 +209,26 @@ WHERE Applications.id ='$idEscaped'";
 				return $this->error;
 			}
 			
-			$title = $data['title'];
-			$category = $data['category'];
-			$description = $data['description'];
+			$Answer_1 = $data['Answer_1'];
+			$program = $data['Program'];
+			$studentID = $data['StudentID'];
 			
-			if (! $title) {
-				$this->error = "No title found for task to add. A title is required.";
+			if (! $Answer_1) {
+				$this->error = "No Answer Provided in Answer_1. Please provide answer.";
 				return $this->error;			
 			}
-			
-			if (! $category) {
-				$category = 'uncategorized';
+			if ($program == "0") {
+				$this->error = "Please select a program.";
+				return $this->error;			
 			}
+
 			
-			$titleEscaped = $this->mysqli->real_escape_string($title);		
-			$categoryEscaped = $this->mysqli->real_escape_string($category);
-			$descriptionEscaped = $this->mysqli->real_escape_string($description);
+			$Answer_1Escaped = $this->mysqli->real_escape_string($Answer_1);		
+			$programEscaped = $this->mysqli->real_escape_string($program);
+			$studentIDEscaped=$this->mysqli->real_escape_string($studentID);
 			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
 
-			$sql = "INSERT INTO tasks (title, description, category, addDate, UserID) VALUES ('$titleEscaped', '$descriptionEscaped', '$categoryEscaped', NOW(), '$userIDEscaped')";
+			$sql = "INSERT INTO Applications (studentID, ProgramID, application_status, application_question_1) VALUES ('$studentIDEscaped', '$programEscaped', 'pending', '$Answer_1Escaped')";
 	
 			if (! $result = $this->mysqli->query($sql)) {
 				$this->error = $this->mysqli->error;

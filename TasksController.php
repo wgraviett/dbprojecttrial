@@ -71,7 +71,7 @@
 					print $this->views->loginFormView($this->data, $this->message);
 					break;
 				case 'taskform':
-					print $this->views->taskFormView($this->model->getUser(), $this->data, $this->message);
+					print $this->views->taskFormView($this->model->getUser(), $this->data, $this->message/*, $this->model->getuserdata($this->model->getUser())*/);
 					break;
 				case 'taskview':
 					print $this->views->taskView($this->model->getUser(), $this->data, $this->message);
@@ -147,7 +147,7 @@
 				$this->view = 'tasklist';
 				return;
 			}
-			
+			//list($task, $error) = $this->model->getuserdata($this->model->getUser())
 			$error = $this->model->addTask($_POST);
 			if ($error) {
 				$this->message = $error;

@@ -19,7 +19,7 @@
 				$body .= "<p class='message'>$message</p>\n";
 			}
 		
-			$body .= "<p><a class='taskButton' href='index.php?view=taskform'>+ Add Task</a> <a class='taskButton' href='index.php?logout=1'>Logout</a></p>\n";
+			$body .= "<p><a class='taskButton' href='index.php?view=taskform'>+ Add Application</a> <a class='taskButton' href='index.php?logout=1'>Logout</a></p>\n";
 	
 			if (count($tasks) < 1) {
 				$body .= "<p>No Applications to display!</p>\n";
@@ -84,6 +84,13 @@
 		$Program_Selected = array('Uncategorized' => '','MSN_AGNP' => '', 'MSN_FNP' => '', 'MSN_PNP-ACPNP' => '', 'MSN_PMHNP' => '');
 
 			
+			if ($user){
+				$FirstName = $user->firstName;
+				$LastName = $user->lastName;
+				$StudentID = ($user->studentid);
+				//add more fields here to autofill more in the application.
+			} 
+			
 			
 			
 					if ($data){
@@ -111,11 +118,11 @@
 			} else {
 				$body .= "<input type='hidden' name='action' value='add' />";
 			}
-		
+		//check limits for the student id to be 8 
 			$body .= <<<EOT2
  <p>Please fill out the form below<br />
 <p>Student ID</>
-<input type = "number" name="StudentID" value="$StudentID" placeholder ="########" maxlength ="8" size="80"></p>
+<input type = "number" name="StudentID" value="$StudentID" placeholder ="########" maxlength ="8" size="80"></p> 
  <p> Full Legal Name<br />
 <label for=LastName>Last Name</label>
   <input type="text" name="LastName" value="$LastName" placeholder="Last Name" maxlength="255" size="20"></p>
