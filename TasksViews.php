@@ -20,7 +20,7 @@
 				if ($message) {
 					$body .= "<p class='message'>$message</p>\n";
 				}
-			
+			//TEST
 				$body .= "<p><a class='taskButton' href='index.php?view=taskform'>+ Add Application</a> <a class='taskButton' href='index.php?logout=1'>Logout</a></p>\n";
 		
 				if (count($tasks) < 1) {
