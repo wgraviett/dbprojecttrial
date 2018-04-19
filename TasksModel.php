@@ -162,7 +162,7 @@
 			//$orderDirectionEscaped = $this->mysqli->real_escape_string($this->orderDirection);
 			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
 
-			$sql = "SELECT Applications.id,Applications.StudentID, users.First_Name, users.Last_Name, Applications.application_status, Applications.ProgramID
+			//$sql = "SELECT Applications.id,Applications.StudentID, users.First_Name, users.Last_Name, Applications.application_status, Applications.ProgramID
 			$studentid = $this->user->studentid;
 			$PermissionID = $this->user->PermissionID;
 			
@@ -170,7 +170,7 @@
 			if(strcmp($PermissionID, 'student')== 0){//student
 				
 				$sql = "SELECT Applications.id,Applications.StudentID, users.First_Name, users.Last_Name, Applications.application_status, Applications.ProgramID
-FROM Applications INNER JOIN users ON users.studentID = Applications.studentID WHERE Applications.studentID = $studentid" ;
+			FROM Applications INNER JOIN users ON users.studentID = Applications.studentID WHERE Applications.studentID = $studentid" ;
 			
 			}
 			else{//admin or advisor
