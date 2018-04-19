@@ -55,6 +55,49 @@
 			}
 		}
 		
+		public function CreateUser($data) {
+			$this->error = '';
+			
+			$FirstName = $data['FirstName'];
+			$LastName = $data['LastName'];
+			$loginid = $data['loginid'];
+			$Password = $data['Password'];
+			$Email = $data['Email'];
+			$StudentID = $data['studentid'];
+			$Address = $data['Address'];
+			$City = $data['City'];
+			$State = $data['State'];
+			$Zipcode = $data['Zipcode'];
+			$County = $data['county'];
+			
+			$FirstNameEscaped = $this->mysqli->real_escape_string($FirstName);
+			$LastNameEscaped = $this->mysqli->real_escape_string($LastName);
+			$loginidEscaped = $this->mysqli->real_escape_string($loginid);
+		$PasswordEscaped = $this->mysqli->real_escape_string($Password);			
+		$EmailEscaped = $this->mysqli->real_escape_string($Email);		
+		$StudentIDEscaped = $this->mysqli->real_escape_string($StudentID);
+		$AddressEscaped = $this->mysqli->real_escape_string($Address);
+		$CityEscaped = $this->mysqli->real_escape_string($City);
+		$StateEscaped = $this->mysqli->real_escape_string($State);
+		$ZipcodeEscaped = $this->mysqli->real_escape_string($Zipcode);		
+		$CountyEscaped = $this->mysqli->real_escape_string($County);	
+		
+
+
+		$PasswordEscaped=password_hash($PasswordEscaped, PASSWORD_DEFAULT); // This is not protecting against SQL injection 
+			$sql = "INSERT INTO users (First_Name, Last_Name, Email, studentId, Password, Street_Address, City, State, Zipcode, county, loginID)
+			VALUES ('$FirstNameEscaped', '$LastNameEscaped', '$EmailEscaped', '$StudentIDEscaped','$PasswordEscaped','$AddressEscaped','$CityEscaped','$StateEscaped','$ZipcodeEscaped','$CountyEscaped', '$loginidEscaped')";
+	
+			if (! $result = $this->mysqli->query($sql)) {
+				$this->error = $this->mysqli->error;
+			}
+			
+			return $this->error;
+		}
+
+		
+		
+		
 		public function getUser() {
 			return $this->user;
 		}
@@ -118,21 +161,9 @@
 			//$orderByEscaped = $this->mysqli->real_escape_string($this->orderBy);
 			//$orderDirectionEscaped = $this->mysqli->real_escape_string($this->orderDirection);
 			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
-			$studentid = $this->user->studentid;
-			$PermissionID = $this->user->PermissionID;
-			
-			
-			if(strcmp($PermissionID, 'student')== 0){//student
-				
-				$sql = "SELECT Applications.id,Applications.StudentID, users.First_Name, users.Last_Name, Applications.application_status, Applications.ProgramID
-FROM Applications INNER JOIN users ON users.studentID = Applications.studentID WHERE Applications.studentID = $studentid" ;
-			
-			}
-			else{//admin or advisor
-				
-				$sql = "SELECT Applications.id,Applications.StudentID, users.First_Name, users.Last_Name, Applications.application_status, Applications.ProgramID
+
+			$sql = "SELECT Applications.id,Applications.StudentID, users.First_Name, users.Last_Name, Applications.application_status, Applications.ProgramID
 FROM Applications INNER JOIN users ON users.studentID = Applications.studentID";
-			}
 			if ($result = $this->mysqli->query($sql)) {
 				if ($result->num_rows > 0) {
 					while($row = $result->fetch_assoc()) {
@@ -261,7 +292,7 @@ WHERE Applications.id ='$idEscaped'";
 			} else {
 				$idEscaped = $this->mysqli->real_escape_string($id);
 				$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
-				$sql = "UPDATE Applications SET application_status = '$status' WHERE id = '$idEscaped'";
+				$sql = "UPDATE Applications SET application_status = '$status' ,approve_date=NOW() WHERE id = '$idEscaped'";
 				if (! $result = $this->mysqli->query($sql) ) {
 					$this->error = $this->mysqli->error;
 				}
