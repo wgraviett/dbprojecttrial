@@ -13,9 +13,8 @@
 		}
 		
 		public function taskListView($user, $tasks, /*$orderBy = 'title', $orderDirection = 'asc',*/ $message = '') {
-<<<<<<< HEAD
+
 			$body = "<h1>Applications for {$user->firstName} {$user->lastName}</h1>\n";
-=======
 			if (strcmp($user ->PermissionID, 'student') == 0){ //student
 				$body = "<h1>Applications for {$user->firstName} {$user->lastName} </h1>\n";
 				if ($message) {
@@ -28,7 +27,6 @@
 					$body .= "<p>No Applications to display!</p>\n";
 					return $this->page($body);
 				}
->>>>>>> feature/studentView
 		
 			if ($message) {
 				$body .= "<p class='message'>$message</p>\n";
@@ -240,7 +238,7 @@ EOT2;
   <label for=Answer_1>What was your favorite undergraduate nursing course?  </label>
   </br>
   <textarea name="Answer_1" rows="6" cols="80" placeholder="" readonly = "readonly">$Answer_1</textarea></p>
-  <input type = "submit" name = 'Cancel' value = "Return">
+  <input type = "submit" name = 'cancel' value = "Return">
 </form>
 EOT2;
 					
