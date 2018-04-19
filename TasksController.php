@@ -56,6 +56,9 @@
 				case 'edit':
 					$this->handleEditTask();
 					break;
+				case 'createuser':
+					$this->handleCreateUser();
+					break;	
 				case 'view':
 					$this->handleViewTask();
 					break;
@@ -72,6 +75,9 @@
 					break;
 				case 'taskform':
 					print $this->views->taskFormView($this->model->getUser(), $this->data, $this->message/*, $this->model->getuserdata($this->model->getUser())*/);
+					break;
+				case 'userform':
+					print $this->views->userformView($this->data, $this->message);
 					break;
 				case 'taskview':
 					print $this->views->taskView($this->model->getUser(), $this->data, $this->message);
@@ -155,6 +161,20 @@
 				$this->data = $_POST;
 			}
 		}
+		
+		private function handleCreateUser(){
+			if ($_POST['cancel']) {
+				$this->view = 'userform';
+				return;
+			}
+			$error = $this->model->CreateUser($_POST);
+				if ($error) {
+				$this->message = $error;
+				$this->view = 'userform';
+				$this->data = $_POST;
+			}
+		}
+		
 		
 		private function handleEditTask() {
 			if (!$this->verifyLogin()) return;

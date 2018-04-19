@@ -211,6 +211,57 @@ EOT2;
 			return $this->page($body);
 		}
 		
+		public function userformView ($data = null, $message = '') {
+			$body = "<h1>Create User </h1>\n";
+			if ($message) {
+				$body .= "<p class='message'>$message</p>\n";
+			}
+			$body .= <<<EOT4
+		<form action="index.php" method="post">
+				<input type='hidden' name='action' value='createuser' />
+				
+				<label for=FirstName>First Name</label>
+				  <input type="text" name="FirstName" value="" placeholder="First Name" maxlength="255" size="20"></p>
+				 
+				 <label for=LastName>Last Name</label>
+				  <input type="text" name="LastName" value="" placeholder="Last Name" maxlength="255" size="20"></p>
+				 
+				  <label for=logind>Username</label>
+				  <input type="text" name="loginid" value="" placeholder="" maxlength="255" size="20"></p>
+				 
+				  <label for=Password>Password</label>
+				  <input type="password" name="Password" value="" placeholder="" maxlength="255" size="20"></p>
+				 
+				  <label for=Email>Email</label>
+				  <input type="text" name="Email" value="" placeholder="" maxlength="255" size="20"></p>
+				   
+				  <label for=studentid>StudentID</label>
+				  <input type="number" name="studentid" value="" placeholder="" maxlength="255" size="20"></p>
+				 
+				 
+				 <label for=Address>Address</label>
+				  <input type="text" name="Address" value="" placeholder="Address" maxlength="255" size="20"></p>
+				 
+				 <label for=city>City</label>
+				  <input type="text" name="City" value="" placeholder="" maxlength="255" size="20"></p>
+
+				  <label for=State>State</label>
+				  <input type="text" name="State" value="" placeholder="" maxlength="255" size="20"></p>
+
+				<label for=Zipcode>Zipcode</label>
+				  <input type="number" name="Zipcode" value="" placeholder="Zipcode" maxlength="255" size="20"></p>
+					
+				<label for=county>County</label>
+				  <input type="text" name="county" value="" placeholder="" maxlength="255" size="20"></p>
+				   
+				  <input type="submit" name ='submit' value="Create user">
+			</form>	
+EOT4;
+			
+			return $this->page($body);
+			
+		}
+	
 		public function loginFormView($data = null, $message = '') {
 			$loginID = '';
 			if ($data) {
@@ -224,13 +275,16 @@ EOT2;
 			}
 			
 			$body .= <<<EOT
-<form action='index.php' method='post'>
+		<p><a class='taskButton' href='index.php?view=userform'>+ Create User</a> </p>\n
+
+		<form action='index.php' method='post'>
 <input type='hidden' name='action' value='login' />
 <p>User ID<br />
   <input type="text" name="loginid" value="$loginID" placeholder="login id" maxlength="255" size="80"></p>
-<p>Title<br />
+<p>Password<br />
   <input type="password" name="password" value="" placeholder="password" maxlength="255" size="80"></p>
   <input type="submit" name='submit' value="Login">
+ 	
 </form>	
 EOT;
 			
