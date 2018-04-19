@@ -15,9 +15,10 @@
 		public function taskListView($user, $tasks, /*$orderBy = 'title', $orderDirection = 'asc',*/ $message = '') {
 
 			//$body = "<h1>Applications for {$user->firstName} {$user->lastName}</h1>\n";
-			$body .= "<p><a class='taskButton' href='index.php?view=taskform'>+ Add Application</a> <a class='taskButton' href='index.php?logout=1'>Logout</a></p>\n";
+			
 			if (strcmp($user ->PermissionID, 'student') == 0){ //student
 				$body = "<h1>Applications for {$user->firstName} {$user->lastName} </h1>\n";
+				$body .= "<p><a class='taskButton' href='index.php?view=taskform'>+ Add Application</a> <a class='taskButton' href='index.php?logout=1'>Logout</a></p>\n";
 				if ($message) {
 					$body .= "<p class='message'>$message</p>\n";
 				}
@@ -92,7 +93,7 @@
 					$body .= "<p class='message'>$message</p>\n";
 				}
 			
-				//$body .= "<p><a class='taskButton' href='index.php?view=taskform'>+ Add Application</a> <a class='taskButton' href='index.php?logout=1'>Logout</a></p>\n";
+				$body .= "<p><a class='taskButton' href='index.php?view=taskform'>+ Add Application</a> <a class='taskButton' href='index.php?logout=1'>Logout</a></p>\n";
 		
 				if (count($tasks) < 1) {
 					$body .= "<p>No Applications to display!</p>\n";
