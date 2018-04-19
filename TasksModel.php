@@ -121,7 +121,7 @@
 			$studentid = $this->user->studentid;
 			$PermissionID = $this->user->PermissionID;
 			
-			
+			//test
 			if(strcmp($PermissionID, 'student')== 0){//student
 				
 				$sql = "SELECT Applications.id,Applications.StudentID, users.First_Name, users.Last_Name, Applications.application_status, Applications.ProgramID
