@@ -163,6 +163,19 @@
 			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
 
 			$sql = "SELECT Applications.id,Applications.StudentID, users.First_Name, users.Last_Name, Applications.application_status, Applications.ProgramID
+			$studentid = $this->user->studentid;
+			$PermissionID = $this->user->PermissionID;
+			
+			//test
+			if(strcmp($PermissionID, 'student')== 0){//student
+				
+				$sql = "SELECT Applications.id,Applications.StudentID, users.First_Name, users.Last_Name, Applications.application_status, Applications.ProgramID
+FROM Applications INNER JOIN users ON users.studentID = Applications.studentID WHERE Applications.studentID = $studentid" ;
+			
+			}
+			else{//admin or advisor
+				
+				$sql = "SELECT Applications.id,Applications.StudentID, users.First_Name, users.Last_Name, Applications.application_status, Applications.ProgramID
 FROM Applications INNER JOIN users ON users.studentID = Applications.studentID";
 			if ($result = $this->mysqli->query($sql)) {
 				if ($result->num_rows > 0) {
