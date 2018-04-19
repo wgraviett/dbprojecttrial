@@ -189,7 +189,8 @@
 				$body .= "<input type='hidden' name='action' value='add' />";
 			}
 		//check limits for the student id to be 8 
-			if (strcmp($user->$PermissionID, 'student')== 0){//student
+		$PermissionID = $user ->PermissionID
+			if (strcmp($PermissionID, 'student')== 0){//student
 				echo "student";
 				$body .= <<<EOT2
  <p>Please fill out the form below<br />
