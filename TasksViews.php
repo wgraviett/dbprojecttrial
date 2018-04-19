@@ -14,14 +14,15 @@
 		
 		public function taskListView($user, $tasks, /*$orderBy = 'title', $orderDirection = 'asc',*/ $message = '') {
 
-			$body = "<h1>Applications for {$user->firstName} {$user->lastName}</h1>\n";
+			//$body = "<h1>Applications for {$user->firstName} {$user->lastName}</h1>\n";
+			$body .= "<p><a class='taskButton' href='index.php?view=taskform'>+ Add Application</a> <a class='taskButton' href='index.php?logout=1'>Logout</a></p>\n";
 			if (strcmp($user ->PermissionID, 'student') == 0){ //student
 				$body = "<h1>Applications for {$user->firstName} {$user->lastName} </h1>\n";
 				if ($message) {
 					$body .= "<p class='message'>$message</p>\n";
 				}
 			//TEST
-				$body .= "<p><a class='taskButton' href='index.php?view=taskform'>+ Add Application</a> <a class='taskButton' href='index.php?logout=1'>Logout</a></p>\n";
+				//$body .= "<p><a class='taskButton' href='index.php?view=taskform'>+ Add Application</a> <a class='taskButton' href='index.php?logout=1'>Logout</a></p>\n";
 		
 				if (count($tasks) < 1) {
 					$body .= "<p>No Applications to display!</p>\n";
@@ -32,7 +33,7 @@
 				$body .= "<p class='message'>$message</p>\n";
 			}
 		
-			$body .= "<p><a class='taskButton' href='index.php?view=taskform'>+ Add Application</a> <a class='taskButton' href='index.php?logout=1'>Logout</a></p>\n";
+			
 	
 			if (count($tasks) < 1) {
 				$body .= "<p>No Applications to display!</p>\n";
@@ -40,7 +41,7 @@
 			}
 	
 			$body .= "<table>\n";
-			$body .= "<tr><th>delete</th><th>edit</th><th>View</th><th>Approve</th><th>Deny</th>";
+			$body .= "<tr><th>Delete</th><th>Edit</th><th>View</th>";
 		
 			$columns = array(array('name' => 'id', 'label' => 'Application ID'),
 			array('name' => 'First_Name', 'label' => 'First Name'),
@@ -78,8 +79,8 @@
 				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='delete' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
 				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='edit' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
 				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='view' /><input type='hidden' name='id' value='$id' /><input type='submit' value='View'></form></td>";
-				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='approve' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Approve'></form></td>";
-				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='deny' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Deny'></form></td>";			
+				//$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='approve' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Approve'></form></td>";
+			//	$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='deny' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Deny'></form></td>";			
 				$body .= "<td>$id</td><td>$First_Name</td><td>$Last_Name</td><td>$StudentID</td><td>$application_status</td><td>$ProgramID</td>";
 				$body .= "</tr>\n";
 			}
@@ -91,7 +92,7 @@
 					$body .= "<p class='message'>$message</p>\n";
 				}
 			
-				$body .= "<p><a class='taskButton' href='index.php?view=taskform'>+ Add Application</a> <a class='taskButton' href='index.php?logout=1'>Logout</a></p>\n";
+				//$body .= "<p><a class='taskButton' href='index.php?view=taskform'>+ Add Application</a> <a class='taskButton' href='index.php?logout=1'>Logout</a></p>\n";
 		
 				if (count($tasks) < 1) {
 					$body .= "<p>No Applications to display!</p>\n";
@@ -189,7 +190,7 @@
 				$body .= "<input type='hidden' name='action' value='add' />";
 			}
 		//check limits for the student id to be 8 
-		$PermissionID = $user ->PermissionID
+		$PermissionID = $user ->PermissionID;
 			if (strcmp($PermissionID, 'student')== 0){//student
 				echo "student";
 				$body .= <<<EOT2
