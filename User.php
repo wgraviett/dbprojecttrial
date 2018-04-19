@@ -6,6 +6,7 @@ class User {
 	public $loginID = '';
 	public $userID = 0;
 	public $hashedPassword = '';
+	public $PermissionID ='';
 	
 	public function load($loginID, $mysqli) {
 		$this->clear();
@@ -34,8 +35,7 @@ class User {
 				$this->Zipcode = $user['Zipcode'];
 				$this->county = $user['county'];
 				$this->PermissionID = $user['PermissionID'];
-				
-				
+							
 			}
 			$result->close();
 			return true;

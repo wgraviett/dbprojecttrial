@@ -13,9 +13,10 @@
 		}
 		
 		public function taskListView($user, $tasks, /*$orderBy = 'title', $orderDirection = 'asc',*/ $message = '') {
-			$body = "<h1>Applications for {$user->firstName} {$user->lastName}</h1>\n";
 			
-			if ($PermissionID == 0){ //student
+			
+			if (strcmp($user ->PermissionID, 'student') == 0){ //student
+				$body = "<h1>Applications for {$user->firstName} {$user->lastName} </h1>\n";
 				if ($message) {
 					$body .= "<p class='message'>$message</p>\n";
 				}
@@ -74,6 +75,7 @@
 			
 			}
 			else {//admin or advisor
+				$body = "<h1>All Applications </h1>\n";
 				if ($message) {
 					$body .= "<p class='message'>$message</p>\n";
 				}
@@ -86,7 +88,7 @@
 				}
 		
 				$body .= "<table>\n";
-				$body .= "<tr><th>delete</th><th>edit</th><th>View</th><th>Approve</th><th>Deny</th>";
+				$body .= "<tr><th>delete</th><th>View</th><th>Approve</th><th>Deny</th>";
 			
 				$columns = array(array('name' => 'id', 'label' => 'Application ID'),
 				array('name' => 'First_Name', 'label' => 'First Name'),
@@ -122,7 +124,7 @@
 				
 					$body .= "<tr>";
 					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='delete' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
-					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='edit' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Edit'></form></td>";
+					
 					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='view' /><input type='hidden' name='id' value='$id' /><input type='submit' value='View'></form></td>";
 					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='approve' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Approve'></form></td>";
 					$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='deny' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Deny'></form></td>";			
@@ -180,7 +182,8 @@
 				$body .= "<input type='hidden' name='action' value='add' />";
 			}
 		//check limits for the student id to be 8
-			if (PermissionID == 0){//student
+			if (strcmp($PermissionID, 'student')== 0){//student
+				echo "student";
 				$body .= <<<EOT2
  <p>Please fill out the form below<br />
 <p>Student ID</>
