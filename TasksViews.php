@@ -377,8 +377,8 @@ EOT4;
 			}
 			
 			$body .= <<<EOT
-		<p><a class='taskButton' href='index.php?view=userform'>+ Create User</a> </p>\n
-
+	<!--	<p><a class='taskButton' href='index.php?view=userform'>+ Create User</a> </p>\n -->
+			<p><a class='taskButton' href='userform.html'>+ Create User</a> </p>\n
 		<form action='index.php' method='post'>
 <input type='hidden' name='action' value='login' />
 <p>User ID<br />
