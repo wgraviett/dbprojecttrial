@@ -8,6 +8,8 @@ We designed a Student Application Managment Sytem that is designed for education
  
 When a student navigates to the application website, they must create a user account by clicking *Create User*. Within the create user form entry, the student will enter all basic information about themselves such as name, address, birthdate, phone number,etc. This data will be recorded and used to prepopulate their application forms. If a user already has an existing account the application will alert them that an account already exists for their StudentID or LoginID. Once a user account is created, they will be redirected to the main login site. Once logged in, the student has the option to *Add Application* where they select which program and the respective form fields are shown. Currently the system is demonstrating a concept of one question for all fields. During customization a department can provide detailed requirements. Once the student submits their form, the entry is displayed on their view and they can view the status of the application or retract the application. A student can apply to as many departments as they want and all entries will appear in their view.  
 
+The image below depicts the Entity Relationship Diagram of our Student Application Management System. There a three databases that store data related to the users, applications, and different programs offered. 
+![ERD_Diagram](http://wesleygdatabase.epizy.com/MVCSammy/DatabaseERDV1.jpg)
 
 the schema for the database (the table definitions).
 an entity relationship diagram (ERD) for the database.
