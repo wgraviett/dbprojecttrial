@@ -27,6 +27,28 @@ Table: Users
 |County|varchar(10)|Yes||||
 |loginID|varchar(25)|Yes||||
 
+Table:Applications
+
+|Field| Type| NULL| Key| Default| Extra |
+|-----|-----|-----|----|--------|-------|
+|studentID|varchar(8)|NO||||
+|ProgramID|int(11)|NO||||
+|application_status|enum('Accepted','pending'.'denied')|NO||"Pending"||
+|submit_date|timestamp|NO||Current_Timestamp||
+|approve_date|datetime|Yes||||
+|application_question1|mediumtext|NO||||
+|ID|int(11)|NO|Primary||AUTO_INCREMENT|
+
+Table: Programs
+
+|Field| Type| NULL| Key| Default| Extra |
+|-----|-----|-----|----|--------|-------|
+|ID|int(11)|NO|Primary||AUTO_INCREMENT|
+|ProgramName|varchar(100)|NO||||
+|Description|mediumtext|NO||||
+|Department|mediumtext|NO||||
+|ProgramLength|int(11)|Yes||||
+|Session|date|Yes||||
 
 The image below depicts the Entity Relationship Diagram of our Student Application Management System. There a three databases that store data related to the users, applications, and different programs offered. 
 ![ERD_Diagram](http://wesleygdatabase.epizy.com/MVCSammy/DatabaseERDV1.jpg)
