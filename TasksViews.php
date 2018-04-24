@@ -1,19 +1,15 @@
 <?php
-
 	class TasksViews {
 		private $stylesheet = 'taskmanager.css';
 		private $pageTitle = 'Tasks';
 		
 		public function __construct() {
-
 		}
 		
 		public function __destruct() {
-
 		}
 		
 		public function taskListView($user, $tasks, /*$orderBy = 'title', $orderDirection = 'asc',*/ $message = '') {
-
 			//$body = "<h1>Applications for {$user->firstName} {$user->lastName}</h1>\n";
 			
 			if (strcmp($user ->PermissionID, 'student') == 0){ //student
@@ -73,8 +69,6 @@
 				$First_Name= $task['First_Name'];
 				$Last_Name = $task['Last_Name'];
 				$StudentID = $task['StudentID'];
-
-
 			
 				$body .= "<tr>";
 				$body .= "<td><form action='index.php' method='post'><input type='hidden' name='action' value='delete' /><input type='hidden' name='id' value='$id' /><input type='submit' value='Delete'></form></td>";
@@ -147,14 +141,13 @@
 			return $this->page($body);
 		}
 		
-		public function taskFormView($user, $data = null, $message = '') {
+		public function taskFormView($user, $data = null, $message = '') {//EDIT
 			$FirstName = '';
 			$LastName ='';
 			$StudentID='';
 			$Program='';
 			$Answer_1='';
 		$Program_Selected = array('0' => '','1' => '', '2' => '', '3' => '', '4' => '');
-
 			
 			if ($user){
 				$FirstName = $user->firstName;
@@ -166,11 +159,17 @@
 			
 			
 					if ($data){
-						echo "in if";
+						//echo "in if";
 				$Program=$data['ProgramID'] ? $data['ProgramID'] : 'Uncategorized';
 				$FirstName = $data['First_Name'];
 				$LastName = $data['Last_Name'];
 				$StudentID= $data['studentID'];
+				$Address = $data['Street_Address'];
+				$City = $data['City'];
+				$State = $data ['State'];
+				$Zip = $data ['Zipcode'];
+				$county = $data ['county'];
+		
 				$Program_Selected[$Program] = 'selected'; //check this 
 				$Answer_1 = $data['application_question_1'];
 			} else {
@@ -178,7 +177,6 @@
 			}
 	
 			$body = "<h1>Applications for  {$user->firstName} {$user->lastName}</h1>\n";
-
 			if ($message) {
 				$body .= "<p class='message'>$message</p>\n";
 			}
@@ -203,6 +201,17 @@
   <input type="text" name="LastName" value="$LastName" placeholder="Last Name" maxlength="255" size="20"></p>
 <label for=FirstName>First Name</label>
   <input type="text" name="FirstName" value="$FirstName" placeholder="First Name" maxlength="255" size="20"></p>
+  <label for=address>Street Address</label>
+  <input type="text" name="address" value="$Address" placeholder="Street Address" maxlength="255" size="20"></p>
+  <label for=city>City</label>
+  <input type="text" name="city" value="$City" placeholder="City" maxlength="255" size="20"></p>
+  <label for=state>State</label>
+  <input type="text" name="state" value="$State" placeholder="State" maxlength="255" size="20"></p>
+  <label for=zip>Zipcode</label>
+  <input type="text" name="zip" value="$Zip" placeholder="Zipcode" maxlength="255" size="20"></p>
+  <label for=county>County</label>
+  <input type="text" name="county" value="$county" placeholder="County" maxlength="255" size="20"></p>
+  
 <label for=program>Select Program</label>
   <select name="Program">
   	  <option value="0" $Program_Selected[0]>Uncategorized</option>
@@ -228,20 +237,31 @@ EOT2;
 			$StudentID='';
 			$Program='';
 			$Answer_1='';
-		$Program_Selected = array('Uncategorized' => '','MSN_AGNP' => '', 'MSN_FNP' => '', 'MSN_PNP-ACPNP' => '', 'MSN_PMHNP' => '');
-
+			$Address = '';
+			//echo $Address;
+			$City = '';
+			$State = '';
+			$Zip = '';
+			$County = '';
+			
+		$Program_Selected = array('0' => '','1' => '', '2' => '', '3' => '', '4' => '');
 			
 			
 			
 					if ($data){
-				$Program=$data['ProgramID'] ? $data['ProgramID'] : 'uncategorized';
+				$Program=$data['ProgramID'] ? $data['ProgramID'] : 'Uncategorized';
 				$FirstName = $data['First_Name'];
 				$LastName = $data['Last_Name'];
-				$Address = $data['Street_Address'];//ADDED HERE
+				
+				$Address = $data['Street_Address'];
+				//echo $Address;
+				//echo FirstName;
+				//$Address = "5065 Kennelwood Dr.";
 				$City = $data['City'];
 				$State = $data['State'];
 				$Zip = $data['Zipcode'];
 				$County = $data['county'];
+				
 				$StudentID= $data['studentID'];
 				$Program_Selected[$Program] = 'selected'; //check this 
 				$Answer_1 = $data['application_question_1'];
@@ -249,8 +269,7 @@ EOT2;
 				$Program_Selected['uncategorized'] = 'selected';
 			}
 	
-			$body = "<h1>Applications for {$user->firstName} {$user->lastName}</h1>\n";
-
+			$body = "<h1>Applications for {$FirstName} {$LastName}</h1>\n";
 			if ($message) {
 				$body .= "<p class='message'>$message</p>\n";
 			}
@@ -258,7 +277,7 @@ EOT2;
 			$body .= "<form action='index.php' method='post'>";
 		
 			if ($data['id']) {
-				$body .= "<input type='hidden' name='action' value='update' />";
+				//$body .= "<input type='hidden' name='action' value='update' />";
 				$body .= "<input type='hidden' name='id' value='{$data['id']}' />";
 			} else {
 				$body .= "<input type='hidden' name='action' value='add' readonly = 'readonly' />";
@@ -273,9 +292,9 @@ EOT2;
   <input type="text" name="LastName" value="$LastName" placeholder="Last Name" maxlength="255" size="20" readonly = "readonly"></p>
 <label for=FirstName>First Name</label>
   <input type="text" name="FirstName" value="$FirstName" placeholder="First Name" maxlength="255" size="20" readonly = "readonly"></p>
-  <label for=Street_Address>Street Address</label>
-  <input type="text" name="Street_Address" value="$Address" placeholder="Street Address" maxlength="255" size="20" readonly = "readonly"></p>
-<label for=city>City</label>
+<label for=Address>Street Address</label>
+  <input type="text" name="Address" value="$Address" placeholder="Street Address" maxlength="255" size="20" readonly = "readonly"></p>
+<label for=City>City</label>
   <input type="text" name="city" value="$City" placeholder="City" maxlength="255" size="20" readonly = "readonly"></p>
 <label for=State>State</label>
   <input type="text" name="State" value="$State" placeholder="State" maxlength="255" size="20" readonly = "readonly"></p>
@@ -283,7 +302,6 @@ EOT2;
   <input type="text" name="Zip" value="$Zip" placeholder="Zipcode" maxlength="255" size="20" readonly = "readonly"></p>
 <label for=county>County</label>
   <input type="text" name="county" value="$county" placeholder="County" maxlength="255" size="20" readonly = "readonly"></p>
-
   <select name="Program" disabled = "true">
   	  <option value="0">Uncategorized</option>
 	  <option value="1">MSN - Adult Gerontology NP</option>
@@ -298,7 +316,6 @@ EOT2;
   <input type = "submit" name = 'Cancel' value = "Return">
 </form>
 EOT2;
-
 			return $this->page($body);
 		}
 		
@@ -335,10 +352,8 @@ EOT2;
 				 
 				 <label for=city>City</label>
 				  <input type="text" name="City" value="" placeholder="" maxlength="255" size="20"></p>
-
 				  <label for=State>State</label>
 				  <input type="text" name="State" value="" placeholder="" maxlength="255" size="20"></p>
-
 				<label for=Zipcode>Zipcode</label>
 				  <input type="number" name="Zipcode" value="" placeholder="Zipcode" maxlength="255" size="20"></p>
 					
@@ -405,5 +420,4 @@ $body
 EOT;
 			return $html;
 		}
-
 }

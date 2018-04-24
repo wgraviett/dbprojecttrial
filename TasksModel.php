@@ -1,11 +1,8 @@
 <?php
-
 	// NOTE: this version has beginning of support for logging in and supporting
 	// multiple users.  This version does not yet have the database table for users
 	// or the change to the database so that each task is affiliated with a user.
-
 	require('User.php');
-
 	class TasksModel {
 		private $error = '';
 		private $mysqli;
@@ -82,8 +79,6 @@
 		$ZipcodeEscaped = $this->mysqli->real_escape_string($Zipcode);		
 		$CountyEscaped = $this->mysqli->real_escape_string($County);	
 		
-
-
 		$PasswordEscaped=password_hash($PasswordEscaped, PASSWORD_DEFAULT); // This is not protecting against SQL injection 
 			$sql = "INSERT INTO users (First_Name, Last_Name, Email, studentId, Password, Street_Address, City, State, Zipcode, county, loginID)
 			VALUES ('$FirstNameEscaped', '$LastNameEscaped', '$EmailEscaped', '$StudentIDEscaped','$PasswordEscaped','$AddressEscaped','$CityEscaped','$StateEscaped','$ZipcodeEscaped','$CountyEscaped', '$loginidEscaped')";
@@ -94,7 +89,6 @@
 			
 			return $this->error;
 		}
-
 		
 		
 		
@@ -161,7 +155,6 @@
 			//$orderByEscaped = $this->mysqli->real_escape_string($this->orderBy);
 			//$orderDirectionEscaped = $this->mysqli->real_escape_string($this->orderDirection);
 			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
-
 			//$sql = "SELECT Applications.id,Applications.StudentID, users.First_Name, users.Last_Name, Applications.application_status, Applications.ProgramID
 			$studentid = $this->user->studentid;
 			$PermissionID = $this->user->PermissionID;
@@ -242,10 +235,9 @@ FROM Applications INNER JOIN users ON users.studentID = Applications.studentID";
 			
 			$idEscaped = $this->mysqli->real_escape_string($id);
 			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
-
-			$sql = "SELECT Applications.id, Applications.application_question_1, Applications.studentID, users.First_Name, users.Last_Name, users.Street_Address, users.City, users.State, users.Zipcode, users.county, Applications.ProgramID
-FROM users INNER JOIN Applications ON Applications.studentID = users.studentid
-WHERE Applications.id ='$idEscaped'";
+			$sql = "SELECT Applications.id, Applications.application_question_1, Applications.studentID, users.First_Name, users.Last_Name, 
+			users.Street_Address, users.City, users.State, users.Zipcode, users.county, Applications.ProgramID
+FROM users INNER JOIN Applications ON Applications.studentID = users.studentid WHERE Applications.id ='$idEscaped'";
 			if ($result = $this->mysqli->query($sql)) {
 				if ($result->num_rows > 0) {
 					$task = $result->fetch_assoc();
@@ -278,13 +270,11 @@ WHERE Applications.id ='$idEscaped'";
 				$this->error = "Please select a program.";
 				return $this->error;			
 			}
-
 			
 			$Answer_1Escaped = $this->mysqli->real_escape_string($Answer_1);		
 			$programEscaped = $this->mysqli->real_escape_string($program);
 			$studentIDEscaped=$this->mysqli->real_escape_string($studentID);
 			$userIDEscaped = $this->mysqli->real_escape_string($this->user->userID);
-
 			$sql = "INSERT INTO Applications (studentID, ProgramID, application_status, application_question_1) VALUES ('$studentIDEscaped', '$programEscaped', 'pending', '$Answer_1Escaped')";
 	
 			if (! $result = $this->mysqli->query($sql)) {
@@ -346,7 +336,7 @@ WHERE Applications.id ='$idEscaped'";
 			$ProgramID = $data['Program'];
 			
 			
-			$sql = "UPDATE Applications SET application_question_1='$Answer1', ProgramID=$ProgramID WHERE id= $idEscaped";
+			$sql = "UPDATE Applications SET application_question_1='$Answer1' WHERE id= $idEscaped";
 			if (! $result = $this->mysqli->query($sql) ) {
 				$this->error = $this->mysqli->error;
 			} 
@@ -381,8 +371,6 @@ WHERE Applications.id ='$idEscaped'";
 			
 			return $this->error;
 		}
-
 	
 	}
-
 ?>
