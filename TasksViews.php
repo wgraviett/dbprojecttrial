@@ -201,16 +201,7 @@
   <input type="text" name="LastName" value="$LastName" placeholder="Last Name" maxlength="255" size="20"></p>
 <label for=FirstName>First Name</label>
   <input type="text" name="FirstName" value="$FirstName" placeholder="First Name" maxlength="255" size="20"></p>
-  <label for=address>Street Address</label>
-  <input type="text" name="address" value="$Address" placeholder="Street Address" maxlength="255" size="20"></p>
-  <label for=city>City</label>
-  <input type="text" name="city" value="$City" placeholder="City" maxlength="255" size="20"></p>
-  <label for=state>State</label>
-  <input type="text" name="state" value="$State" placeholder="State" maxlength="255" size="20"></p>
-  <label for=zip>Zipcode</label>
-  <input type="text" name="zip" value="$Zip" placeholder="Zipcode" maxlength="255" size="20"></p>
-  <label for=county>County</label>
-  <input type="text" name="county" value="$county" placeholder="County" maxlength="255" size="20"></p>
+ 
   
 <label for=program>Select Program</label>
   <select name="Program">
@@ -231,7 +222,7 @@ EOT2;
 			
 			return $this->page($body);
 		}
-		public function taskView($user, $data = null, $message = '') {
+public function taskView($user, $data = null, $message = '') {//VIEW
 			$FirstName = '';
 			$LastName ='';
 			$StudentID='';
@@ -282,7 +273,7 @@ EOT2;
 			} else {
 				$body .= "<input type='hidden' name='action' value='add' readonly = 'readonly' />";
 			}
-		
+			
 			$body .= <<<EOT2
  <p>Please fill out the form below<br />
 <p>Student ID</>
@@ -303,11 +294,11 @@ EOT2;
 <label for=county>County</label>
   <input type="text" name="county" value="$county" placeholder="County" maxlength="255" size="20" readonly = "readonly"></p>
   <select name="Program" disabled = "true">
-  	  <option value="0">Uncategorized</option>
-	  <option value="1">MSN - Adult Gerontology NP</option>
-	  <option value="2">MSN - Family Nurse Practitioner</option>
-	  <option value="3">MSN - Pediatric Nurse Practitioner</option>
-	  <option value="4" selected>MSN - Psychiatric Mental Health Nurse Practitioner</option>
+  	  <option value="0" $Program_Selected[0]>Uncategorized</option>
+	  <option value="1" $Program_Selected[1]>MSN - Adult Gerontology NP</option>
+	  <option value="2" $Program_Selected[2]>MSN - Family Nurse Practitioner</option>
+	  <option value="3" $Program_Selected[3]>MSN - Pediatric Nurse Practitioner</option>
+	  <option value="4" $Program_Selected[4]>MSN - Psychiatric Mental Health Nurse Practitioner</option>
   </select>
 </p>
   <label for=Answer_1>What was your favorite undergraduate nursing course?  </label>

@@ -336,7 +336,7 @@ FROM users INNER JOIN Applications ON Applications.studentID = users.studentid W
 			$ProgramID = $data['Program'];
 			
 			
-			$sql = "UPDATE Applications SET application_question_1='$Answer1' WHERE id= $idEscaped";
+			$sql = "UPDATE Applications SET application_question_1='$Answer1', ProgramID = '$ProgramID' WHERE id= $idEscaped";
 			if (! $result = $this->mysqli->query($sql) ) {
 				$this->error = $this->mysqli->error;
 			} 
