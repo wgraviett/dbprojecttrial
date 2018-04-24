@@ -218,34 +218,8 @@
   <input type="submit" value="Submit"><input type="submit" name='cancel' value="Cancel">
 </form>
 EOT2;
-/*			}
-			else{//admin or advisor
-				$body .= <<<EOT2
- <p>Please fill out the form below<br />
-<p>Student ID</>
-<input type = "number" name="StudentID" value="$StudentID" placeholder ="########" maxlength ="8" size="80" readonly = "readonly"></p>
- <p> Full Legal Name<br />
-<label for=LastName>Last Name</label>
-  <input type="text" name="LastName" value="$LastName" placeholder="Last Name" maxlength="255" size="20" readonly = "readonly"></p>
-<label for=FirstName>First Name</label>
-  <input type="text" name="FirstName" value="$FirstName" placeholder="First Name" maxlength="255" size="20" readonly = "readonly"></p>
-<label for=program>Select Program</label>
-  <select name="Program" disabled = "true">
-  	  <option value="0">Uncategorized</option>
-	  <option value="1">MSN - Adult Gerontology NP</option>
-	  <option value="2">MSN - Family Nurse Practitioner</option>
-	  <option value="3">MSN - Pediatric Nurse Practitioner</option>
-	  <option value="4" selected>MSN - Psychiatric Mental Health Nurse Practitioner</option>
-  </select>
-</p>
-  <label for=Answer_1>What was your favorite undergraduate nursing course?  </label>
-  </br>
-  <textarea name="Answer_1" rows="6" cols="80" placeholder="" readonly = "readonly">$Answer_1</textarea></p>
-  <input type = "submit" name = 'cancel' value = "Return">
-</form>
-EOT2;
-					
-			}
+	
+			
 			return $this->page($body);
 		}
 		public function taskView($user, $data = null, $message = '') {
@@ -309,7 +283,7 @@ EOT2;
   <input type = "submit" name = 'Cancel' value = "Return">
 </form>
 EOT2;
-*/
+
 			return $this->page($body);
 		}
 		
