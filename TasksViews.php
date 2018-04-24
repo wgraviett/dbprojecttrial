@@ -192,8 +192,8 @@
 			}
 		//check limits for the student id to be 8 
 		$PermissionID = $user ->PermissionID;
-			if (strcmp($PermissionID, 'student')== 0){//student
-				echo "student";
+			//if (strcmp($PermissionID, 'student')== 0){//student
+				//echo "student";
 				$body .= <<<EOT2
  <p>Please fill out the form below<br />
 <p>Student ID</>
@@ -218,7 +218,7 @@
   <input type="submit" value="Submit"><input type="submit" name='cancel' value="Cancel">
 </form>
 EOT2;
-			}
+/*			}
 			else{//admin or advisor
 				$body .= <<<EOT2
  <p>Please fill out the form below<br />
@@ -309,7 +309,7 @@ EOT2;
   <input type = "submit" name = 'Cancel' value = "Return">
 </form>
 EOT2;
-
+*/
 			return $this->page($body);
 		}
 		
