@@ -153,7 +153,7 @@
 			$StudentID='';
 			$Program='';
 			$Answer_1='';
-		$Program_Selected = array('Uncategorized' => '','MSN_AGNP' => '', 'MSN_FNP' => '', 'MSN_PNP-ACPNP' => '', 'MSN_PMHNP' => '');
+		$Program_Selected = array('0' => '','1' => '', '2' => '', '3' => '', '4' => '');
 
 			
 			if ($user){
@@ -166,7 +166,8 @@
 			
 			
 					if ($data){
-				$Program=$data['ProgramID'] ? $data['ProgramID'] : 'uncategorized';
+						echo "in if";
+				$Program=$data['ProgramID'] ? $data['ProgramID'] : 'Uncategorized';
 				$FirstName = $data['First_Name'];
 				$LastName = $data['Last_Name'];
 				$StudentID= $data['studentID'];
@@ -190,11 +191,10 @@
 			} else {
 				$body .= "<input type='hidden' name='action' value='add' />";
 			}
-		//check limits for the student id to be 8 
+		
 		$PermissionID = $user ->PermissionID;
-			//if (strcmp($PermissionID, 'student')== 0){//student
-				//echo "student";
-				$body .= <<<EOT2
+			
+		$body .= <<<EOT2
  <p>Please fill out the form below<br />
 <p>Student ID</>
 <input type = "number" name="StudentID" value="$StudentID" placeholder ="########" maxlength ="8" size="80"></p> 
@@ -205,11 +205,11 @@
   <input type="text" name="FirstName" value="$FirstName" placeholder="First Name" maxlength="255" size="20"></p>
 <label for=program>Select Program</label>
   <select name="Program">
-  	  <option value="0">Uncategorized</option>
-	  <option value="1">MSN - Adult Gerontology NP</option>
-	  <option value="2">MSN - Family Nurse Practitioner</option>
-	  <option value="3">MSN - Pediatric Nurse Practitioner</option>
-	  <option value="4" selected>MSN - Psychiatric Mental Health Nurse Practitioner</option>
+  	  <option value="0" $Program_Selected[0]>Uncategorized</option>
+	  <option value="1" $Program_Selected[1]>MSN - Adult Gerontology NP</option>
+	  <option value="2" $Program_Selected[2]>MSN - Family Nurse Practitioner</option>
+	  <option value="3" $Program_Selected[3]>MSN - Pediatric Nurse Practitioner</option>
+	  <option value="4" $Program_Selected[4]>MSN - Psychiatric Mental Health Nurse Practitioner</option>
   </select>
 </p>
   <label for=Answer_1>What was your favorite undergraduate nursing course?  </label>
@@ -237,6 +237,11 @@ EOT2;
 				$Program=$data['ProgramID'] ? $data['ProgramID'] : 'uncategorized';
 				$FirstName = $data['First_Name'];
 				$LastName = $data['Last_Name'];
+				$Address = $data['Street_Address'];//ADDED HERE
+				$City = $data['City'];
+				$State = $data['State'];
+				$Zip = $data['Zipcode'];
+				$County = $data['county'];
 				$StudentID= $data['studentID'];
 				$Program_Selected[$Program] = 'selected'; //check this 
 				$Answer_1 = $data['application_question_1'];
@@ -268,7 +273,17 @@ EOT2;
   <input type="text" name="LastName" value="$LastName" placeholder="Last Name" maxlength="255" size="20" readonly = "readonly"></p>
 <label for=FirstName>First Name</label>
   <input type="text" name="FirstName" value="$FirstName" placeholder="First Name" maxlength="255" size="20" readonly = "readonly"></p>
-<label for=program>Select Program</label>
+  <label for=Street_Address>Street Address</label>
+  <input type="text" name="Street_Address" value="$Address" placeholder="Street Address" maxlength="255" size="20" readonly = "readonly"></p>
+<label for=city>City</label>
+  <input type="text" name="city" value="$City" placeholder="City" maxlength="255" size="20" readonly = "readonly"></p>
+<label for=State>State</label>
+  <input type="text" name="State" value="$State" placeholder="State" maxlength="255" size="20" readonly = "readonly"></p>
+<label for=Zip>Zipcode</label>
+  <input type="text" name="Zip" value="$Zip" placeholder="Zipcode" maxlength="255" size="20" readonly = "readonly"></p>
+<label for=county>County</label>
+  <input type="text" name="county" value="$county" placeholder="County" maxlength="255" size="20" readonly = "readonly"></p>
+
   <select name="Program" disabled = "true">
   	  <option value="0">Uncategorized</option>
 	  <option value="1">MSN - Adult Gerontology NP</option>
