@@ -1,11 +1,11 @@
 body {
 	margin: 10px;
-	background-color: #8ef;
+	background-color: black;
 	font-family: arial;
 }
 
 table, th, td {
-	border: 1px solid black;
+	border: 10px solid black;
 	border-collapse: collapse;
 }
 

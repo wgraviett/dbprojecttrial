@@ -13,7 +13,19 @@
 			//$body = "<h1>Applications for {$user->firstName} {$user->lastName}</h1>\n";
 			
 			if (strcmp($user ->PermissionID, 'student') == 0){ //student
-				$body = "<h1>Applications for {$user->firstName} {$user->lastName} </h1>\n";
+				//$body = "<h1>Applications for {$user->firstName} {$user->lastName} </h1>\n";
+				$body = "<div id='container' style='white-space:nowrap'>
+
+    <div id='image' style='display:inline;'>
+        <img src='mu.png' width= 60 height = 50/>
+		<font size='8' weight = 'bold'>College of Nursing Admissions</font>
+    </div>
+
+    <div id='texts' style='display:inline; white-space:nowrap;'> 
+           </div>
+
+</div>​
+<br /><h1>Applications for {$user->firstName} {$user->lastName}</h1>\n";
 				$body .= "<p><a class='taskButton' href='index.php?view=taskform'>+ Add Application</a> <a class='taskButton' href='index.php?logout=1'>Logout</a></p>\n";
 				if ($message) {
 					$body .= "<p class='message'>$message</p>\n";
@@ -176,7 +188,19 @@
 				$Program_Selected['uncategorized'] = 'selected';
 			}
 	
-			$body = "<h1>Applications for  {$user->firstName} {$user->lastName}</h1>\n";
+			$body = "<div id='container' style='white-space:nowrap'>
+
+    <div id='image' style='display:inline;'>
+        <img src='mu.png' width= 50 height = 50/>
+		<font size='8' weight = 'bold'>College of Nursing Admissions</font>
+    </div>
+
+    <div id='texts' style='display:inline; white-space:nowrap;'> 
+           </div>
+
+</div>​
+<br /><h1>Applications for {$user->firstName} {$user->lastName}</h1>\n";
+			//<img src = 'mu.png' width=50 height = 50><h1>College of Nursing Admissions<h1><br /><h1>Applications for {$user->firstName} {$user->lastName}</h1>\n";//
 			if ($message) {
 				$body .= "<p class='message'>$message</p>\n";
 			}
