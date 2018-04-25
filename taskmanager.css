@@ -1,41 +1,46 @@
 body {
 	margin: 10px;
-	background-color: #8ef;
+	background-color: #293133;
 	font-family: arial;
+	color:white
 }
 
 table, th, td {
-	border: 1px solid black;
+	border: 10px solid black;
 	border-collapse: collapse;
+	color:black;
 }
 
 th, td {
 	padding: 4px;
+	color:black;
 }
 
 th {
-	background-color: #6de;
+	background-color: #F1B82D;
 }
 
 td {
-	background-color: #fff;
+	background-color: #F1B82D;
+	color:black;
 }
 
 a.taskButton:link, a.taskButton:visited, a.taskButton:active {
 	color: black;
 	font-size: 1.2em;
 	text-decoration: none;
-	background-color: #6de;
+	background-color: #F1B82D;
 	padding: 5px;
 	border: 1px solid #4bc;
 }
 
 a.taskButton:hover {
-	background-color: #5cd;
+	background-color: black;
+	color:white;
 }
 
 form {
-	background-color: #6de;
+	background-color: #F1B82D;
 	border: 1px solid #4bc;
 	padding: 5px;
 }
