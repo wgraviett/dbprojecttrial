@@ -1,10 +1,11 @@
 <?php
 	require('TasksModel.php');
 	require('TasksViews.php');
-
+// This file acts the controller for our database project. It passes data back and forth from the view to the model. 
 	class TasksController {
-		private $model;
-		private $views;
+		
+		private $model; // Recieves which model to handle the data. 
+		private $views; // Variable to determine which view to present. Is transported to controller. Model cannot talk to it. 
 		
 		private $orderBy = '';
 		private $view = '';
@@ -13,14 +14,16 @@
 		private $data = array();
 	
 		public function __construct() {
+			//Runs when program is started. Instiates variables for model and views. 
 			$this->model = new TasksModel();
 			$this->views = new TasksViews();
 			
-			$this->view = $_GET['view'] ? $_GET['view'] : 'tasklist';
-			$this->action = $_POST['action'];
+			$this->view = $_GET['view'] ? $_GET['view'] : 'tasklist'; //REceives the view identification tag from the html in the browser. 
+			$this->action = $_POST['action']; //Recieves an acction such as a button click. Tag is hidden in html forms used throughout. 
 		}
 		
 		public function __destruct() {
+			//This function resets the model and views. 
 			$this->model = null;
 			$this->views = null;
 		}
@@ -38,6 +41,7 @@
 			$this->processLogout();
 
 			switch($this->action) {
+					//Based on the action received from the website this switch statement will call the respective handler. 
 				case 'login':
 					$this->handleLogin();
 					break;
@@ -70,6 +74,7 @@
 			}
 			
 			switch($this->view) {
+					//Based on the action clicked the correct view will be determined. 
 				case 'loginform': 
 					print $this->views->loginFormView($this->data, $this->message);
 					break;
@@ -115,6 +120,8 @@
 		}
 		
 		private function handleLogin() {
+			//Receives the login information from the login form and checks it against the database
+			//by sending the data to model, if success then the view will change to logged in view. 
 			$loginID = $_POST['loginid'];
 			$password = $_POST['password'];
 			
@@ -129,6 +136,8 @@
 		}
 		
 		private function handleDelete() {
+			//When user deletes their application the ID of the application will be retrieved from html and passed
+			// to a model. View is then refreshed. 
 			if (!$this->verifyLogin()) return;
 		
 			if ($error = $this->model->deleteTask($_POST['id'])) {
@@ -138,6 +147,8 @@
 		}
 		
 		private function handleSetApplicationStatus($status) {
+			// When approve or decline button is pressed this function runs.
+			//Respective model is set and application ID status is updated. 
 			if (!$this->verifyLogin()) return;
 			
 			if ($error = $this->model->updateapplicationStatus($_POST['id'], $status)) {
@@ -147,6 +158,8 @@
 		}
 		
 		private function handleAddTask() {
+			// When new application button is pressed this function runs.
+			// Respective model is ran to collect user data from form and create database entry. 
 			if (!$this->verifyLogin()) return;
 			
 			if ($_POST['cancel']) {
@@ -163,6 +176,8 @@
 		}
 		
 		private function handleCreateUser(){
+			//When create user button is pressed, it will move the view to a form for user data.
+			//Form is submitted into respective model. 
 			if ($_POST['cancel']) {
 				$this->view = 'userform';
 				return;
@@ -204,6 +219,8 @@
 		}
 		
 		private function handleUpdateTask() {
+			//When a student updated data in their application or user profile this function will run
+			// Update SQL statement is run in model. 
 			if (!$this->verifyLogin()) return;
 			
 			if ($_POST['cancel']) {
@@ -218,7 +235,7 @@
 				return;
 			}
 			
-			$this->view = 'tasklist';
+			$this->view = 'tasklist'; // Revert to list view. 
 		}
 	}
 ?>
