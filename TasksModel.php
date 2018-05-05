@@ -1,7 +1,7 @@
 <?php
-	// NOTE: this version has beginning of support for logging in and supporting
-	// multiple users.  This version does not yet have the database table for users
-	// or the change to the database so that each task is affiliated with a user.
+	// This model serves as the data managment tool of this project.
+	// Specfic functions are called from the controller file and data is passed.
+	// Data is then acted upon with query, update, delete commands. 
 	require('User.php');
 	class TasksModel {
 		private $error = '';
@@ -28,6 +28,7 @@
 		}
 		
 		private function initDatabaseConnection() {
+			// Sets up database connection using preset file. 
 			require('db_credentials.php');
 			$this->mysqli = new mysqli($servername, $username, $password, $dbname);
 			if ($this->mysqli->connect_error) {
@@ -44,6 +45,8 @@
 		}
 		
 		private function restoreUser() {
+			// When the page is refreshed and a session is still logged, the user 
+			//will automatically be logged in. 
 			if ($loginID = $_SESSION['loginid']) {
 				$this->user = new User();
 				if (!$this->user->load($loginID, $this->mysqli)) {
@@ -53,6 +56,8 @@
 		}
 		
 		public function CreateUser($data) {
+			// Receives data from the create user form.
+			//Data is then inserted into database. This data is used throughout the model. 
 			$this->error = '';
 			
 			$FirstName = $data['FirstName'];
@@ -139,6 +144,7 @@
 		}
 		
 		public function getTasks() {
+			//Retrieves all applications 
 			$this->error = '';
 			$tasks = array();
 			
@@ -159,7 +165,7 @@
 			$studentid = $this->user->studentid;
 			$PermissionID = $this->user->PermissionID;
 			
-			//test
+			//Checks if the logged in user is a student or admin and determines with what data to show. 
 			if(strcmp($PermissionID, 'student')== 0){//student
 				
 				$sql = "SELECT Applications.id,Applications.StudentID, users.First_Name, users.Last_Name, Applications.application_status, Applications.ProgramID
@@ -187,7 +193,7 @@ FROM Applications INNER JOIN users ON users.studentID = Applications.studentID";
 		}
 		
 		public function getuserdata($loginID){
-		
+		// Retrieves user data when user logs in. 
 		$loginIDEscaped = ($loginID->loginID);
 	
 		$sql = "SELECT * FROM users WHERE loginID = '$loginIDEscaped'";
@@ -215,6 +221,7 @@ FROM Applications INNER JOIN users ON users.studentID = Applications.studentID";
 		
 		
 		public function getTask($id) {
+			//this function is used when an application needs to be fetched to show more deteiled information. 
 			$this->error = '';
 			$task = null;
 			
@@ -251,6 +258,7 @@ FROM users INNER JOIN Applications ON Applications.studentID = users.studentid W
 		}
 		
 		public function addTask($data) {
+			//This function is called when a user creates an application. 
 			$this->error = '';
 			
 			if (!$this->user) {
@@ -285,6 +293,7 @@ FROM users INNER JOIN Applications ON Applications.studentID = users.studentid W
 		}
 		
 		public function updateapplicationStatus($id, $status) {
+			//When user edits the application and data must be prepopulated. 
 			$this->error = "";
 			
 			if (!$this->user) {
